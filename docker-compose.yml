@@ -1,12 +1,15 @@
-version: '3.8'
-
 services:
-  ui:
+  kurrent-ui:
+    networks:
+      - kurrent-network
     build: .
     container_name: kurrent-ocr-ui
     ports:
       - "8501:8501"
     environment:
-      - BACKEND_URL=http://localhost:8000/v1/transcribe
+      - BACKEND_URL=http://kurrent-ocr-api:8000/v1/transcribe
     restart: always
 
+networks:
+  kurrent-network:
+    external: true
