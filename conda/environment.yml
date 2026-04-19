@@ -1,0 +1,13 @@
+name: kurrent-ocr-ui
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - streamlit
+  - requests
+  - pillow
+  - pip:
+    - watchdog  # Optimization for Streamlit to detect file changes
+
