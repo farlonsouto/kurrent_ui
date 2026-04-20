@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kurrent-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kurrent-ui
+  template:
+    metadata:
+      labels:
+        app: kurrent-ui
+    spec:
+      containers:
+      - name: streamlit
+        # Updated to match your local image name
+        image: kurrent-ui:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: BACKEND_URL
+          value: "http://kurrent-ocr-service:8000/v1/transcribe"
+        ports:
+        - containerPort: 8501
+

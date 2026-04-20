@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kurrent-ingress
+  annotations:
+    # Standard annotation for the most common controller
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  # Generic hostname. While it works locally,  
+  # in a real environment the host value changes.
+  - host: kurrent.local.sslip.io  
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kurrent-ui-service
+            port:
+              number: 8501
+
