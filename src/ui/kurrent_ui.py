@@ -10,10 +10,10 @@ st.sidebar.write(f"Connecting to: `{backend_url}`")
 st.set_page_config(page_title="Kurrent HTR", layout="wide")
 st.title("Kurrent HTR - Transcription Tool")
 
-uploaded_file = st.file_uploader("Upload de manuscrito (PNG/JPG)", type=['png', 'jpg'])
+uploaded_file = st.file_uploader("Handwritten text upload (PNG/JPG)", type=['png', 'jpg'])
 
 if uploaded_file:
-    with st.spinner('Processando via TrOCR...'):
+    with st.spinner('Processing via TrOCR...'):
         try:
             files = {
                 "file": (uploaded_file.name, uploaded_file.getvalue(), uploaded_file.type)
@@ -28,10 +28,10 @@ if uploaded_file:
                 st.image(uploaded_file, caption="Original")
             with col2:
                 # 3. Access only the 'text' key for the text area
-                st.text_area("Transcrição", value=data.get('text', ''), height=400)
+                st.text_area("Transcription", value=data.get('text', ''), height=400)
 
                 # Using .get() for safety prevents crashes if keys are missing
-                st.info(f"**Modelo:** {data.get('model')} | **Tempo:** {data.get('processing_time_sec')}s")
+                st.info(f"**Model:** {data.get('model')} | **Processing time in seconds:** {data.get('processing_time_sec')}s")
 
         except Exception as e:
-            st.error(f"Erro na conexão com o backend: {e}")
+            st.error(f"Backend connection error: {e}")
